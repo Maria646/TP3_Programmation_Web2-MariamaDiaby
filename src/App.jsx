@@ -12,7 +12,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Routes>
         <Route path='/' element={<CategorieDeRecette/>}/>
-        <Route path="/CategorieDeRecette/:name" element={<RecettesParCategorie/>}/>
+        <Route path="categorie/:name" element={<RecettesParCategorie/>}/>
         <Route path="/CategorieDeRecette/:name/:recette" element={<Recette/>}/>
       </Routes>
     </QueryClientProvider>
