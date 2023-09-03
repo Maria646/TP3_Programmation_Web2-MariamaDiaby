@@ -11,6 +11,7 @@ const RecettesParCategorie = () => {
         queryKey:["recettesParCategories",  params.nameCategorie],
         queryFn: () => recetteService.getAllMealsByCategories(params.nameCategorie),
     })
+    
     console.log(data);
     if(isLoading) return <div>Loading...</div>
     if(isError) return <div>{error.message}</div>
@@ -18,9 +19,10 @@ const RecettesParCategorie = () => {
     return <div>{data && data.meals.map((meal) => {
 		return (
 			<div key={meal.strMeal}>
-                <img src={meal.strMealThumb} alt="" />
-                <Link to={`/${meal.strMeal}`}>
-				<h2>{meal.strMeal}</h2>
+        <Link to={`/categorie/${meal.strCategory}`}>Retour catégorie</Link>
+                <Link to={`recette/${meal.idMeal}`}>
+                  <img src={meal.strMealThumb} alt="" />
+                  <h2>{meal.strMeal}</h2>
                 </Link>
 			</div>
 		)

@@ -1,23 +1,36 @@
 import React from 'react'
+import { Accordion } from 'react-bootstrap'
+import RecetteService from "../services/RecetteService"
 import {useQuery} from "@tanstack/react-query"
-import {useParams} from "react-router-dom"
+import {Link, useParams} from "react-router-dom"
+
+const recetteService = new RecetteService();
 
 const Recette = () => {
+    const params = useParams();
     const {isError, isLoading, error, data} = useQuery({
-        queryKey:["ingredientsRecette"],
-        queryFn: () => recetteService.getAllCategoriesMeals(),
+        queryKey:["recette", params.identifiant],
+        queryFn: () => recetteService.getMeals(params.identifiant),
     })
     console.log(data);
     if(isLoading) return <div>Loading...</div>
     if(isError) return <div>{error.message}</div>
 
-    return <div>{data && data.categories.map((cat) => {
+    return <div>{data && data.meals.map((meal) => {
 		return (
-			<div key={cat.strCategory}>
-                <img src={cat.strCategoryThumb} alt="" />
-                <Link to={`/categorie/${cat.strCategory}`}>
-				<h2>{cat.strCategory}</h2>
-                </Link>
+			<div key={meal.strCategory}>
+                <h1>{meal.strMeal}</h1>
+				<h2>{meal.strCategory}</h2>
+                <img src={meal.strMealThumb} alt="" />
+                    <Accordion defaultActiveKey="1">
+                        <Accordion.Item eventKey="0">
+                            <Accordion.Header>Ingredients</Accordion.Header>
+                            <Accordion.Body>
+                                <span>{meal.strInstructions}</span>
+                                <p>{meal.strInstructions}</p>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                     </Accordion>
 			</div>
 		)
 	})}</div>
