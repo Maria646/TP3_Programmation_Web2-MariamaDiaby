@@ -1,5 +1,6 @@
 import React from 'react'
 import RecetteService from "../services/RecetteService"
+import { Container, Row } from 'react-bootstrap'
 import {useQuery} from "@tanstack/react-query"
 import {Link} from "react-router-dom"
 
@@ -14,16 +15,16 @@ const CategorieDeRecette = () => {
     if(isLoading) return <div>Loading...</div>
     if(isError) return <div>{error.message}</div>
 
-    return <div>{data && data.categories.map((cat) => {
+    return  <Container>{data && data.categories.map((cat) => {
 		return (
-			<div key={cat.strCategory}>
+			<Row key={cat.strCategory} flex>
                 <img src={cat.strCategoryThumb} alt="" />
                 <Link to={`/categorie/${cat.strCategory}`}>
 				<h2>{cat.strCategory}</h2>
                 </Link>
-			</div>
+			</Row>
 		)
-	})}</div>
+	})}</Container>
 }
 
 export default CategorieDeRecette

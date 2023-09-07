@@ -14,6 +14,7 @@ function App() {
         <Route path='/' element={<CategorieDeRecette/>}/>
         <Route path="categorie/:nameCategorie" element={<RecettesParCategorie/>}/>
         <Route path="categorie/:nameCategorie/recette/:identifiant" element={<Recette/>}/>
+        <Route path='/:categories' element={<CategorieDeRecette/>}/>
       </Routes>
     </QueryClientProvider>
   )
