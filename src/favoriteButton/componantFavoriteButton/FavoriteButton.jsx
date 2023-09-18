@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { addFavorite, removeFavorite } from "../store/favoritesSlice";
 import { favoritesSelectors } from "../store/favoritesSelectors";
+import { Link } from "react-router-dom";
 
 const FavoriteButton = ({ recette }) => {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ const FavoriteButton = ({ recette }) => {
   };
 
   return (
+    <div >
     <button type="button" onClick={onClick}>
       {isFavorite ? (
         <svg
@@ -43,6 +45,12 @@ const FavoriteButton = ({ recette }) => {
         </svg>
       )}
     </button>
+    {/* <div>
+        {favorites.map((favorite, index) => (
+          <div key={index}>{favorite.strMeal}</div>
+        ))}
+      </div> */}
+    </div>
   );
 };
 

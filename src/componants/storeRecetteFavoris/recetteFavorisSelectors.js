@@ -1,3 +1,4 @@
 export const recetteFavorisSelectors = (state) => {
-	return state.recetteFavoris.recetteFavoris;
+	console.log(state.recetteFavoris.recetteFavoris)
+	return state.recetteFavoris.recetteFavoris
 };

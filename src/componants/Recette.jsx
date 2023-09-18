@@ -4,9 +4,10 @@ import RecetteService from "../services/RecetteService"
 import { useEffect } from 'react'
 import { useDispatch } from "react-redux"
 import { updateRecetteFavoris } from "./storeRecetteFavoris/recetteFavorisSlice";
-import {useQuery} from "@tanstack/react-query"
+import {defaultContext, useQuery} from "@tanstack/react-query"
 import {Link, useParams} from "react-router-dom"
 import FavoriteButton from '../favoriteButton/componantFavoriteButton/FavoriteButton'
+import ButtonListesRecettesFavoris from "../listesRecetteButton/componants/ButtonListesRecettesFavoris"
 
 const recetteService = new RecetteService();
 
@@ -32,6 +33,8 @@ console.log(dataListCategories)
     useEffect(() => {
         dispatch(updateRecetteFavoris(data));
       }, [dispatch, data]);
+
+console.log(dispatch(updateRecetteFavoris(data)))
 
     if(isLoading) return <div>Loading...</div>
     if(isError) return <div>{error.message}</div>
@@ -74,6 +77,15 @@ console.log(dataListCategories)
                     <Link to={`/categories`}>Retour categorie</Link>
                 </div>
                 <FavoriteButton recette={meal}></FavoriteButton>
+                <Link to={`/listesDesFavoris`}>
+                <ButtonListesRecettesFavoris></ButtonListesRecettesFavoris>
+                </Link>
+                {/* <div>
+      <h1>Liste de toutes les recettes favorites</h1>
+      {favorites.map((recette) => (
+        <div key={recette}>{recette.strMeal}</div>
+      ))}
+    </div> */}
 			</div>
 		)
 	})
