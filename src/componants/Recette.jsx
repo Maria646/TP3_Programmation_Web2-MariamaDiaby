@@ -1,8 +1,12 @@
 import React from 'react'
 import { Accordion, ListGroup, ListGroupItem } from 'react-bootstrap'
 import RecetteService from "../services/RecetteService"
+import { useEffect } from 'react'
+import { useDispatch } from "react-redux"
+import { updateRecetteFavoris } from "./storeRecetteFavoris/recetteFavorisSlice";
 import {useQuery} from "@tanstack/react-query"
 import {Link, useParams} from "react-router-dom"
+import FavoriteButton from '../favoriteButton/componantFavoriteButton/FavoriteButton'
 
 const recetteService = new RecetteService();
 
@@ -20,8 +24,15 @@ const Recette = () => {
         queryFn: () => recetteService.getAllCategoriesMeals(),
     })
 
+console.log(data)
+console.log(dataListCategories)
 
-    console.log(data);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(updateRecetteFavoris(data));
+      }, [dispatch, data]);
+
     if(isLoading) return <div>Loading...</div>
     if(isError) return <div>{error.message}</div>
     if(isLoadingCategories) return <div>Loading...</div>
@@ -36,7 +47,6 @@ const Recette = () => {
         mesures.push(data.meals[0][`strMeasure${i}`]);
     }
 
-    console.log(ingredients, mesures)
 
 
     return <div>{data && data.meals.map((meal) => {
@@ -63,6 +73,7 @@ const Recette = () => {
                 <div>
                     <Link to={`/categories`}>Retour categorie</Link>
                 </div>
+                <FavoriteButton recette={meal}></FavoriteButton>
 			</div>
 		)
 	})

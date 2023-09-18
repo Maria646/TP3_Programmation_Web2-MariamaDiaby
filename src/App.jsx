@@ -4,6 +4,10 @@ import RecettesParCategorie from './componants/RecettesParCategorie'
 import Recette from './componants/Recette'
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query"
 import {Routes, Route} from 'react-router-dom'
+import { Container, Stack } from "react-bootstrap";
+import RecetteFavoris from './componants/RecetteFavoris'
+import FavoriteButton from './favoriteButton/componantFavoriteButton/FavoriteButton'
+import { useSelector } from "react-redux";
 
 const queryClient = new QueryClient()
 
@@ -16,6 +20,11 @@ function App() {
         <Route path="categorie/:nameCategorie/recette/:identifiant" element={<Recette/>}/>
         <Route path='/:categories' element={<CategorieDeRecette/>}/>
       </Routes>
+      {/* <Stack>
+        <Container>
+          <RecetteFavoris></RecetteFavoris>
+        </Container>
+      </Stack> */}
     </QueryClientProvider>
   )
 }
