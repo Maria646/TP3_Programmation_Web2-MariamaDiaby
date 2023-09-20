@@ -25,16 +25,12 @@ const Recette = () => {
         queryFn: () => recetteService.getAllCategoriesMeals(),
     })
 
-console.log(data)
-console.log(dataListCategories)
-
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(updateRecetteFavoris(data));
       }, [dispatch, data]);
 
-console.log(dispatch(updateRecetteFavoris(data)))
 
     if(isLoading) return <div>Loading...</div>
     if(isError) return <div>{error.message}</div>
@@ -80,12 +76,6 @@ console.log(dispatch(updateRecetteFavoris(data)))
                 <Link to={`/listesDesFavoris`}>
                 <ButtonListesRecettesFavoris></ButtonListesRecettesFavoris>
                 </Link>
-                {/* <div>
-      <h1>Liste de toutes les recettes favorites</h1>
-      {favorites.map((recette) => (
-        <div key={recette}>{recette.strMeal}</div>
-      ))}
-    </div> */}
 			</div>
 		)
 	})
