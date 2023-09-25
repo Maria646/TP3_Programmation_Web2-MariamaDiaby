@@ -69,9 +69,7 @@ const Recette = () => {
                             </Accordion.Body>
                         </Accordion.Item>
                      </Accordion>
-                <div>
-                    <Link to={`/categories`}>Retour categorie</Link>
-                </div>
+                <Link to={`/categories`}>Retour categorie</Link>
                 <FavoriteButton recette={meal}></FavoriteButton>
                 <Link to={`/listesDesFavoris`}>
                 <ButtonListesRecettesFavoris></ButtonListesRecettesFavoris>
